@@ -1,0 +1,71 @@
+/* Style Sheet */
+*{
+    font-family: sans-serif;
+}
+
+.vMiddle{
+    margin-top: 5%;
+    margin-bottom:20%
+}
+
+.fade-in{
+    opacity:0;
+    transition: opacity 500ms ease-in;
+}
+
+.fade-in.appear{
+    opacity:1;
+}
+
+.blackBg{
+    background-image: url("https://line204.com/wp-content/uploads/2016/05/deep-dark-space-destkop-backgrounds.jpg");
+}
+
+
+.carousel-item {
+    height: 300px;
+    width: 500px;
+    }
+    .carousel-item img {
+    width: 500px;
+    }
+
+.text-center{
+    text-align: center;
+}
+
+.no-dec{
+    text-decoration: none;
+    color:gray;
+}
+
+.clickable:hover{
+    cursor:pointer
+}
+
+.text-btn {
+    border: none;
+    background-color: inherit;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+.project-image {
+    height: 300px;
+    width: 500px;
+}
+
+.projectBodyActive{
+    height: 15em;
+    overflow-y:hidden;
+}
+
+.breaking{
+    word-wrap: break-word;
+    overflow-y: hidden;
+}
+
+#projectBodyActive>p{
+    font-size: 20px;
+}

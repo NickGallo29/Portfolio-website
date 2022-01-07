@@ -1,0 +1,14 @@
+<% layout('/layouts/boilerplate')%>
+<h1>New Project</h1>
+<form action="/projects" method="POST" enctype="multipart/form-data" novalidate>
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" placeholder ="Project Name" required>
+    <input type="text" name="body" id="quillBody" placeholder ="Body" style="display:none" required>
+    <div id="editor"></div>
+    <input type="text" name="githubUrl" id="githubUrl" placeholder="Github URL" value="https://" required>
+    <input type="file" name="thumbnail" id="" required>
+    <button id="submitProject">Submit</button>
+</form>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="/scripts/quill.js"></script>

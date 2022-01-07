@@ -1,0 +1,52 @@
+<% layout('/layouts/boilerplate')%>
+<div class="d-flex flex-column align-items-center">
+    <h1>Register</h1>
+    <form class="d-flex flex-column align-items-center"action="/register" method="POST">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input class ="form-control mb-2" type="text" name="firstName" placeholder="First Name">
+            <label for="lastName">Last Name</label>
+            <input class ="form-control mb-2" type="text" name="lastName" placeholder="Last Name">
+            <label for="email">Email*</label>
+            <input class ="form-control mb-2" type="email" name="email" placeholder="Email">
+            <label for="username">Username*</label>
+            <input class ="form-control mb-2" type="text" name="username" placeholder="Username">
+            <label for="password">Password*</label>
+            <input class ="form-control mb-2" type="password" name="password" placeholder="Password">
+            <div id="passwordRequirments" class="text-muted">
+                <p class='m-0'><u>Password must contain:</u></p>
+                <%if (passwordErr.includes('passwordComplexity.tooShort')){%>
+                    <p class="m-0 text-danger">8 or more characters</p>
+                <%}else{%>
+                    <p class="m-0">8 or more characters</p>
+                <%}%>
+
+                <%if (passwordErr.includes('passwordComplexity.uppercase')){%>
+                    <p class="m-0 text-danger">Atleast 1 uppercase character(A-Z)</p>
+                <%}else{%>
+                    <p class="m-0">Atleast 1 uppercase character(A-Z)</p>
+                <%}%>
+                <%if (passwordErr.includes('passwordComplexity.lowercase')){%>
+                    <p class="m-0 text-danger">Atleast 1 lowercase character(a-z)</p>
+                <%}else{%>
+                    <p class="m-0">Atleast 1 lowercase character(a-z)</p>
+                <%}%>
+                <%if (passwordErr.includes('passwordComplexity.numeric')){%>
+                    <p class="m-0 text-danger">Atleast 1 number (1-9)</p>
+                <%}else{%>
+                    <p class="m-0">Atleast 1 number (1-9)</p>
+                <%}%>
+                <%if (passwordErr.includes('passwordComplexity.symbol')){%>
+                    <p class="m-0 text-danger">Atleast 1 special character</p>
+                <%}else{%>
+                    <p class="m-0">Atleast 1 special character</p>
+                <%}%>
+            </div>
+            <label for="confirmPassword" class="mt-2">Confirm Password*</label>
+            <input class="form-control mb-2" type="password" name="confirmPassword" placeholder="Confirm Password">
+        </div>
+        <div>
+            <button class="btn btn-outline-dark m-2">Submit</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,56 @@
+<% layout('/layouts/boilerplate')%>
+<div class="d-flex flex-column align-items-center m-4">
+        <h1>Projects</h1>
+        <p>View some of my past projects!</p>
+        <%if(currentUser&&currentUser.isAdmin==true){%>
+                <a href="/projects/new" class="mt-2"><button class="btn btn-outline-dark">New Project</button></a>
+        <%}%>
+        <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" data-bs-interval="false">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <% for(let i=1; i<projects.length;i++){%>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="<%=i%>" aria-label="Slide <%=i%>"></button>           
+                        <%}%>
+                </div>
+                <div class="carousel-inner">
+                        <%x=0%>
+                        <% for(let project of projects){ %>
+                                <% if(x==0){%>
+                                        <div class="carousel-item active" id="projectContent" name="<%=project._id%>">
+                                                <img src="<%=project.thumb%>" class="d-block w-100" alt="hey">
+                                                <h2 class="projectTitleHidden" style="display:none"><%=project.title%></h2>
+                                                <div class="projectBodyHidden" style="display: none;">
+                                                        <%=project.body%>
+                                                </div>
+                                        </div>
+                                        <%x++%>  
+                                <%}else{%>
+                                         <div class="carousel-item" id="projectContent" name="<%=project._id%>">
+                                                <img src="<%=project.thumb%>" class="d-block w-100" alt="hey">
+                                                <h2 class="projectTitleHidden" style="display:none"><%=project.title%></h2>
+                                                <div class="projectBodyHidden" style="display: none;">
+                                                        <%=project.body%>
+                                                </div>
+                                        </div>
+                                <%}%>
+                        <%}%>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+        </div>
+        <h2 class="projectTitleActive mt-4 text-center"></h2>
+        <div id="projectBodyActive"class="projectBodyActive mt-4 text-center"></div>
+        <%if (projects.length>0){%>
+                <a href="/" class="mt-2 readMore"><button class="btn btn-outline-dark">Read More</button></a>
+        <%}else{%>
+                <h2 class="text-muted">No Projects Available<h2>
+        <%}%>
+
+</div>
+<script src="/scripts/carouselController.js"></script>

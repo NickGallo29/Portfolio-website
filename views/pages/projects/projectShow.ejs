@@ -1,0 +1,66 @@
+<% layout('/layouts/boilerplate')%>
+<div class="d-flex flex-column align-items-center m-4">
+    <img src="<%=project.thumb%>" class="d-block" alt="hey">
+    <%if(currentUser&&currentUser.isAdmin==true){%>
+        <div class="d-flex justify-content-start mt-3">
+                <a href="/projects/<%=project._id%>/edit"><button class="mx-4 btn btn-outline-dark" id="editBtn">Edit</button></a>
+                <form action='/projects/<%=project._id%>?_method=DELETE' method="POST"><button class="mx-4 btn btn-outline-dark" id="deleteBtn">Delete</button></form>
+        </div>
+    <%}%>
+    <h1 class='mt-4'><%=project.title%></h1>
+    <div id='projectBodyHidden' style='display:none'><%=project.body%></div>
+    <div id='projectBodyActive' class="text-center mt-3 w-75">
+
+    </div>
+
+    <a href="<%=project.githubUrl%>"><button class='btn btn-outline-dark'>View it on Github</button></a>
+
+    <h2 class="mt-5" id="commentHeader">Comments</h2>
+    <% if(currentUser){%>
+        <form action="/projects/<%=project._id%>/comment" method="POST" id="commentForm" class="w-75 validated-form d-flex flex-column align-items-center" nonvalidate>
+            <div class="form-group mt-4 w-100">
+                    <textarea class="form-control w-100" id="commentArea" rows="3" name='comment[comment]'placeholder="Post a Comment" maxlength="1500" required></textarea>
+            </div>
+            <button class="btn btn-outline-dark mt-3 w-100">Submit</button>
+        </form>
+        <%}else{%>
+            <p class=>Please <a href='/login'>login</a> to post comments</p>
+        <%}%>
+    <div class="projectComments w-75">
+        <% for(let comment of project.comments){ %>
+                <div class="mb-2 commentDiv" id="">
+                        <sub><i><%=comment.author.displayUser%></i></sub>
+                        <div class="mt-1 commentBody"><h5 class="breaking"><%=comment.comment%></h5></div>
+                        <div class="d-flex commentBtn">
+                                <% if(currentUser){%>
+                                        <%if(currentUser.id==comment.author._id||currentUser.isAdmin==true){%>
+                                        <button class="me-3 no-dec commentEdit text-btn text-muted"id="editCommentBtn">Edit</button>
+                                        <form action='/projects/<%=project._id%>/comment/<%=comment._id%>?_method=DELETE' method="POST"><button class="text-btn text-muted">Delete</button></form>
+                                        <%}%>
+                                <%}%>
+                        </div>
+                        <div class="commentUpdate" style="display: none;">
+                                <form action='/projects/<%=project._id%>/comment/<%=comment._id%>?_method=PUT' method="POST" id="commentForm" class="w-50 validated-form" nonvalidate>
+                                        <div class="form-group mt-4 w-100">
+                                                <textarea class="form-control w-100" id="commentArea" rows="3" name='comment[comment]'placeholder="Comment" maxlength="1500" required><%=comment.comment%></textarea>
+                                        </div>
+                                        
+                                </form>
+                                <div class="d-flex mt-2 editOptions">
+                                        <p class="submitCommentChange me-2 clickable text-muted">Submit</p>
+                                        <p class="cancelCommentChange clickable text-muted">Cancel</p>
+                                </div>
+                        </div>
+                        
+                </div>
+                
+        <%}%>
+    </div>
+</div>
+
+<script>
+    const text = document.getElementById('projectBodyHidden').textContent;
+    document.getElementById('projectBodyActive').innerHTML=text
+</script>
+
+    
