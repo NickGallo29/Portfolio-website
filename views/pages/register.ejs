@@ -4,13 +4,13 @@
     <form class="d-flex flex-column align-items-center"action="/register" method="POST">
         <div class="form-group">
             <label for="firstName">First Name</label>
-            <input class ="form-control mb-2" type="text" name="firstName" placeholder="First Name">
+            <input class ="form-control mb-2" type="text" name="firstName" placeholder="First Name" value=<%if(registerInfo.firstName){%><%=registerInfo.firstName%><%}%>>
             <label for="lastName">Last Name</label>
-            <input class ="form-control mb-2" type="text" name="lastName" placeholder="Last Name">
+            <input class ="form-control mb-2" type="text" name="lastName" placeholder="Last Name" value=<%if(registerInfo.firstName){%><%=registerInfo.lastName%><%}%>>
             <label for="email">Email*</label>
-            <input class ="form-control mb-2" type="email" name="email" placeholder="Email">
+            <input class ="form-control mb-2" type="email" name="email" placeholder="Email" value=<%if(registerInfo.firstName){%><%=registerInfo.email%><%}%>>
             <label for="username">Username*</label>
-            <input class ="form-control mb-2" type="text" name="username" placeholder="Username">
+            <input class ="form-control mb-2" type="text" name="username" placeholder="Username" value=<%if(registerInfo.firstName){%><%=registerInfo.username%><%}%>>
             <label for="password">Password*</label>
             <input class ="form-control mb-2" type="password" name="password" placeholder="Password">
             <div id="passwordRequirments" class="text-muted">

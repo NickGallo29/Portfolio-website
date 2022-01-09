@@ -12,7 +12,7 @@ const User = require('../models/user');
 const resetToken = require('../models/resetTokens');
 const ExpressError = require('../utils/ExpressError')
 const Joi = require('joi');
-const {isLoggedIn}= require('../utils/middleware');
+const {isLoggedIn,resetRequire}= require('../utils/middleware');
 const session=require('express-session');
 const passport = require('passport')
 const catchAsync=require('../utils/catchAsync');
@@ -50,6 +50,8 @@ const passwordOptions = {
 
 //Enforces password policy using Password Complexity module
 const passwordRequirments =async(req,res,next)=>{
+    console.log(req.body);
+    req.session.registerInfo=req.body
    const {error}=await passwordComplexity(passwordOptions).validate(req.body.password);
    if (error){
        const details= error.details
@@ -87,7 +89,9 @@ const userValidate=(req,res,next)=>{
 
 }
 
-router.get('/register',(req,res)=>{
+router.get('/register',resetRequire,(req,res)=>{
+    res.locals.passwordErr=req.session.passError || []
+    req.session.passError=[]
     res.render('pages/register');
 })
 

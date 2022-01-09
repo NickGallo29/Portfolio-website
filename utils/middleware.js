@@ -47,3 +47,7 @@ module.exports.adminValidate = (req,res,next)=>{
     console.log(req.body,' the body');
     next();
  }
+
+ module.exports.resetRequire=(req,res,next)=>{
+    next()
+ }

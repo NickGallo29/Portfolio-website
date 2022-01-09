@@ -99,16 +99,13 @@ app.use(flash());
 
 //Setting local variables
 app.use((req,res,next)=>{
-    res.locals.passwordErr=[]
+    res.locals.registerInfo=req.session.registerInfo||{}
     res.locals.currentUser=req.user;
     res.locals.success =req.flash('success');
     res.locals.error = req.flash('error');
-    if(req.session.passError){
-        res.locals.passwordErr=req.session.passError
-        delete req.session.passError
-    }
     next()
 })
+
 
 ///////////////////
 //External routers
